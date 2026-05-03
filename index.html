@@ -2,67 +2,65 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Fouad Store</title>
+<title>Fouad Cyber Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:#000;
   color:white;
   overflow-x:hidden;
+  background:black;
 }
 
-/* ===== BACKGROUND PARTICLES ===== */
-#particles {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: radial-gradient(circle,#0a0a0a,#000);
+/* 🎬 VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-2;
 }
 
-/* ===== HEADER ===== */
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.65);
+  z-index:-1;
+}
+
+/* HEADER */
 header{
-  background: linear-gradient(90deg,#00ffd5,#00aaff);
-  padding:20px;
-  text-align:center;
-  font-size:26px;
-  font-weight:bold;
-  color:black;
-  box-shadow:0 0 20px #00ffd5;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid #00ffd5;
 }
 
-/* ===== HERO ===== */
+.logo{
+  color:#00ffd5;
+  font-weight:bold;
+}
+
+/* HERO */
 .hero{
   text-align:center;
-  padding:60px 20px;
+  padding:80px 20px;
 }
 
 .hero h1{
-  font-size:38px;
+  font-size:40px;
   color:#00ffd5;
+  text-shadow:0 0 20px #00ffd5,0 0 40px #00aaff;
 }
 
-.hero p{
-  color:#ccc;
-  font-size:18px;
-}
-
-/* typing effect */
-.typing{
-  font-size:18px;
-  color:#00ffd5;
-  margin-top:10px;
-  border-right:2px solid #00ffd5;
-  width:fit-content;
-  margin-inline:auto;
-  white-space:nowrap;
-  overflow:hidden;
-}
-
-/* ===== GRID ===== */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -71,45 +69,68 @@ header{
 }
 
 .card{
-  background:rgba(20,20,20,0.8);
-  padding:18px;
-  border-radius:14px;
+  background:rgba(20,20,20,0.7);
   border:1px solid #00ffd5;
+  border-radius:14px;
+  padding:18px;
   transition:0.3s;
-  backdrop-filter: blur(5px);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  left:-100%;
+  top:0;
+  background:linear-gradient(90deg,transparent,rgba(0,255,213,0.3),transparent);
+  transition:0.5s;
+}
+
+.card:hover::before{
+  left:100%;
 }
 
 .card:hover{
   transform:scale(1.08);
   box-shadow:0 0 25px #00ffd5;
-  background:#111;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 .btn{
   display:block;
-  width:250px;
+  width:240px;
   margin:30px auto;
   text-align:center;
-  background:linear-gradient(90deg,#25D366,#00ffd5);
   padding:14px;
-  border-radius:12px;
-  color:white;
-  text-decoration:none;
+  background:linear-gradient(90deg,#00ffd5,#00aaff);
+  color:black;
   font-weight:bold;
-  transition:0.3s;
+  text-decoration:none;
+  border-radius:12px;
 }
 
-.btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 25px #25D366;
+/* MUSIC BUTTON */
+.music-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:linear-gradient(90deg,#00ffd5,#00aaff);
+  border:none;
+  padding:12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 15px #00ffd5;
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   text-align:center;
-  color:gray;
   padding:15px;
+  color:gray;
   font-size:12px;
 }
 </style>
@@ -117,81 +138,49 @@ footer{
 
 <body>
 
-<div id="particles"></div>
+<!-- 🎬 VIDEO -->
+<video class="video-bg" autoplay muted loop>
+  <source src="https://cdn.pixabay.com/video/2023/03/21/155276-810802123_large.mp4" type="video/mp4">
+</video>
 
-<header>🛒 FOUAD STORE</header>
+<div class="overlay"></div>
+
+<header>
+  <div class="logo">🛒 Fouad Store</div>
+</header>
 
 <div class="hero">
-  <h1>مرحبا بك في متجرنا</h1>
-  <div class="typing" id="typing"></div>
-  <p>أفضل خدمات فري فاير والجواهر والأكواد</p>
+  <h1>CYBER GAMING STORE 🔥</h1>
+  <p>أفضل خدمات فري فاير</p>
 </div>
 
 <div class="grid">
-  <div class="card">🔥 حسابات فري فاير</div>
-  <div class="card">💎 شحن جواهر</div>
-  <div class="card">🎫 أكواد فري فاير</div>
-  <div class="card">🟣 جيفات إنوي</div>
-  <div class="card">💲 أرصدة إلكترونية</div>
-  <div class="card">🤝 وساطة بيع وشراء</div>
-  <div class="card">⚙️ تأمين الحسابات</div>
-  <div class="card">⚡ سرعة في التنفيذ</div>
+  <div class="card">💎 جواهر</div>
+  <div class="card">🔥 حسابات</div>
+  <div class="card">🎮 أكواد</div>
+  <div class="card">⚡ تسليم سريع</div>
 </div>
 
-<a class="btn" href="https://wa.me/212705870942" target="_blank">
+<a class="btn" href="https://wa.me/212705870942">
 📲 اطلب عبر واتساب
 </a>
 
-<footer>© Fouad Store - جميع الحقوق محفوظة</footer>
+<!-- 🎧 زر الصوت -->
+<button class="music-btn" onclick="playMusic()">🎧 Morphine</button>
+
+<iframe id="music" width="0" height="0"
+frameborder="0" allow="autoplay"></iframe>
 
 <script>
-/* ===== TYPING EFFECT ===== */
-const text = "أفضل متجر لخدمات فري فاير 🔥";
-let i = 0;
-function type(){
-  if(i < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(type,80);
-  }
+function playMusic(){
+  document.getElementById("music").src =
+  "https://www.youtube.com/embed/kSXt_zQn9Yc?start=0&end=10&autoplay=1";
 }
-type();
-
-/* ===== SIMPLE PARTICLES ===== */
-const canvas = document.createElement("canvas");
-document.getElementById("particles").appendChild(canvas);
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let dots = [];
-
-for(let i=0;i<80;i++){
-  dots.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    r: Math.random()*2
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#00ffd5";
-
-  dots.forEach(d=>{
-    ctx.beginPath();
-    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
-    ctx.fill();
-
-    d.y -= 0.5;
-    if(d.y < 0) d.y = canvas.height;
-  });
-
-  requestAnimationFrame(draw);
-}
-draw();
 </script>
+
+<footer>
+© Fouad Store
+</footer>
 
 </body>
 </html>
