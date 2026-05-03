@@ -9,36 +9,60 @@
 body{
   margin:0;
   font-family:Arial;
-  background:#0a0a0a;
+  background:#000;
   color:white;
+  overflow-x:hidden;
 }
 
-/* HEADER */
+/* ===== BACKGROUND PARTICLES ===== */
+#particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(circle,#0a0a0a,#000);
+}
+
+/* ===== HEADER ===== */
 header{
   background: linear-gradient(90deg,#00ffd5,#00aaff);
   padding:20px;
   text-align:center;
-  font-size:24px;
+  font-size:26px;
   font-weight:bold;
   color:black;
+  box-shadow:0 0 20px #00ffd5;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   text-align:center;
-  padding:40px 20px;
+  padding:60px 20px;
 }
 
 .hero h1{
+  font-size:38px;
   color:#00ffd5;
-  font-size:32px;
 }
 
 .hero p{
   color:#ccc;
+  font-size:18px;
 }
 
-/* SERVICES */
+/* typing effect */
+.typing{
+  font-size:18px;
+  color:#00ffd5;
+  margin-top:10px;
+  border-right:2px solid #00ffd5;
+  width:fit-content;
+  margin-inline:auto;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -47,33 +71,41 @@ header{
 }
 
 .card{
-  background:#151515;
-  padding:15px;
-  border-radius:12px;
+  background:rgba(20,20,20,0.8);
+  padding:18px;
+  border-radius:14px;
   border:1px solid #00ffd5;
   transition:0.3s;
+  backdrop-filter: blur(5px);
 }
 
 .card:hover{
-  transform:scale(1.05);
-  background:#1f1f1f;
+  transform:scale(1.08);
+  box-shadow:0 0 25px #00ffd5;
+  background:#111;
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .btn{
   display:block;
-  width:220px;
+  width:250px;
   margin:30px auto;
   text-align:center;
-  background:#25D366;
-  padding:12px;
-  border-radius:10px;
+  background:linear-gradient(90deg,#25D366,#00ffd5);
+  padding:14px;
+  border-radius:12px;
   color:white;
   text-decoration:none;
   font-weight:bold;
+  transition:0.3s;
 }
 
-/* FOOTER */
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #25D366;
+}
+
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
   color:gray;
@@ -81,22 +113,21 @@ footer{
   font-size:12px;
 }
 </style>
-
 </head>
 
 <body>
 
-<header>
-🛒 FOUAD STORE
-</header>
+<div id="particles"></div>
+
+<header>🛒 FOUAD STORE</header>
 
 <div class="hero">
   <h1>مرحبا بك في متجرنا</h1>
+  <div class="typing" id="typing"></div>
   <p>أفضل خدمات فري فاير والجواهر والأكواد</p>
 </div>
 
 <div class="grid">
-
   <div class="card">🔥 حسابات فري فاير</div>
   <div class="card">💎 شحن جواهر</div>
   <div class="card">🎫 أكواد فري فاير</div>
@@ -105,16 +136,62 @@ footer{
   <div class="card">🤝 وساطة بيع وشراء</div>
   <div class="card">⚙️ تأمين الحسابات</div>
   <div class="card">⚡ سرعة في التنفيذ</div>
-
 </div>
 
 <a class="btn" href="https://wa.me/212705870942" target="_blank">
 📲 اطلب عبر واتساب
 </a>
 
-<footer>
-© Fouad Store - جميع الحقوق محفوظة
-</footer>
+<footer>© Fouad Store - جميع الحقوق محفوظة</footer>
+
+<script>
+/* ===== TYPING EFFECT ===== */
+const text = "أفضل متجر لخدمات فري فاير 🔥";
+let i = 0;
+function type(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type,80);
+  }
+}
+type();
+
+/* ===== SIMPLE PARTICLES ===== */
+const canvas = document.createElement("canvas");
+document.getElementById("particles").appendChild(canvas);
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let dots = [];
+
+for(let i=0;i<80;i++){
+  dots.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*2
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#00ffd5";
+
+  dots.forEach(d=>{
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fill();
+
+    d.y -= 0.5;
+    if(d.y < 0) d.y = canvas.height;
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 
 </body>
 </html>
